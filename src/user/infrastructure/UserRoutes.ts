@@ -1,7 +1,14 @@
 import express from "express";
 
-import { registerUserController } from "./dependecies";
+import {
+  createUserController,
+  getUserByUserNameController,
+} from "./dependecies";
 
 export const userRouter = express.Router();
 
-userRouter.post("/", registerUserController.run.bind(registerUserController));
+userRouter.post("/", createUserController.run.bind(createUserController));
+userRouter.get(
+  "/:username",
+  getUserByUserNameController.run.bind(getUserByUserNameController)
+);

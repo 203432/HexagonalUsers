@@ -30,4 +30,20 @@ export class PostgresUserRepository implements UserRepository {
 
     return user;
   }
+
+  async getUserById(id: string): Promise<User | null> {
+    console.log("Buscando al usuario con id " + id);
+    const query = await pool.query(
+      'SELECT * FROM public."Users" WHERE id = $1',
+      [id]
+    );
+
+    if (query.rows.length == 0) {
+      return null;
+    }
+
+    const user: User = query.rows[0];
+
+    return user;
+  }
 }
